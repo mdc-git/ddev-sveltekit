@@ -32,7 +32,7 @@ ddev yarn dev
 
   this essentially handles outgoing cors fetch requests in endpoints.
   
-  it should override the outgoing Origin (`event.url`) to `DDEV_PRIMARY_URL`
+  it should override the outgoing requests origin (`event.url`) to `DDEV_PRIMARY_URL`
   
   this makes it consistent with the external servers `Access-Control-Allow-Origin`
 
