@@ -4,9 +4,10 @@ pre_install_actions:
 - |
   #ddev-nodisplay
   echo "Check for src/hooks.server.js:"
-  if [ -f ../src/hooks.server.js ]; then
+  if [ -f src/hooks.server.js ]; then
     echo "src/hooks.server.js exists. Cannot continue." && exit 2
   fi
+  echo $PWD
 
 project_files:
   - nginx_full/nginx-site.conf
