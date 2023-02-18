@@ -1,10 +1,10 @@
 # ddev-sveltekit
 
+## Run sveltekit with vite in dev mode behind nginx ssl proxy. 
+
 Note: This will not install if there is already an `src/hooks.server.js` file.
 
 You should review your `src/hooks.server.js` file and either remove it or you'd have to adjust all your files manually.
-
-Run sveltekit with vite in dev mode behind nginx ssl proxy. 
 
 Related bugs:
 
