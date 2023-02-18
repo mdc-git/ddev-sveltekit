@@ -1,0 +1,7 @@
+#ddev-generated
+# Override the web container's standard HTTP_EXPOSE and HTTPS_EXPOSE
+# This is to expose the browsersync port.
+services:
+  web:
+    external_links:
+      - 'ddev-router:project2.ddev.site'

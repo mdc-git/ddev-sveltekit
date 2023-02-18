@@ -5,6 +5,7 @@ pre_install_actions: []
 project_files:
   - nginx_full/nginx-site.conf
   - sveltekit/hooks.server.js
+  - docker-compose.network.yaml
 
 post_install_actions:
   - cp sveltekit/hooks.server.js ../src/hooks.server.js
