@@ -19,7 +19,7 @@ ddev get mdc-git/ddev-sveltekit
 ddev yarn dev
 ```
 
-Related bugs:
+## Related bugs:
 
 - https://github.com/sveltejs/kit/issues/8026
   
