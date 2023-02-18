@@ -6,7 +6,7 @@ This is for `@sveltejs/kit <= 1.0.0-next.525`.
 
 https://github.com/torenware/ddev-viteserve might fit your needs better if you are not using svelte.
 
-Note: This will not install if there is already a `src/hooks.server.js` file.
+**Note:** This will not install if there is already a `src/hooks.server.js` file.
 
 You should review your `src/hooks.server.js` file and either remove it or you'd have to adjust all your files manually.
 
