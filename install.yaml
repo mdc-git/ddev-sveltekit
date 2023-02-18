@@ -1,23 +1,13 @@
-name: ddev-viteserve
+name: ddev-sveltekit
 
-pre_install_actions:
-# This item shows complex go templating possibilities based on yaml_read_files
-- |
-- #ddev-description:Create a hooks.server.js
-  cat <<'EOF' > hooks.server.js
-  /** @type {import('@sveltejs/kit').Handle} */
-  export async function handle({ event, resolve }) {
-      if (process.env.IS_DDEV_PROJECT === 'true' && event.url.host === 'node-srv') {
-          event.url = new URL(event.url.href.replace('http://node-srv', process.env.DDEV_PRIMARY_URL))
-      }
-      const response = await resolve(event);
-      return response;
-  }
-  EOF  
+pre_install_actions: []
+
 project_files:
   - nginx_full/nginx-site.conf
+  - sveltekit/hooks.server.js
 
-post_install_actions: []
+post_install_actions:
+  - cp .ddev/sveltekit/hooks.server.js src/hooks.server.js
 
 # post_install_actions:
 #   - ddev exec .ddev/viteserve/build-dotenv.sh
