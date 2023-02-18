@@ -1,6 +1,7 @@
 name: ddev-sveltekit
 
-pre_install_actions: []
+pre_install_actions:
+  - [ -f ../src/hooks.server.js ] && echo "src/hooks.server.js exists. Cannot continue." && false
 
 project_files:
   - nginx_full/nginx-site.conf
