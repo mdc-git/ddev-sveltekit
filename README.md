@@ -34,6 +34,6 @@ ddev yarn dev
   
   it should override the outgoing Origin (`event.url`) to DDEV_PRIMARY_URL
   
-  so that it is consistent with the servers Access-Control-Allow-Origin
+  this makes it consistent with the external servers `Access-Control-Allow-Origin`
 
 - https://github.com/sveltejs/kit/issues/6589 
