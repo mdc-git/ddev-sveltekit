@@ -6,6 +6,15 @@ Note: This will not install if there is already a `src/hooks.server.js` file.
 
 You should review your `src/hooks.server.js` file and either remove it or you'd have to adjust all your files manually.
 
+Sample Usage:
+
+```
+ddev config --auto --omit-containers=db,dba --nodejs-version=16 
+mkcert -install
+ddev get mdc-git/ddev-sveltekit
+ddev yarn dev
+```
+
 Related bugs:
 
 - https://github.com/sveltejs/kit/issues/8026
