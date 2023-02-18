@@ -8,7 +8,7 @@ Related bugs:
   
   see nginx-site.conf: `proxy_set_header Origin http://node-srv;`
   
-  this fixes Cross-site POST form submissions are forbidden to /api
+  this fixes Cross-site POST form submissions are forbidden to internal `/api` requests.
   
   
 - https://github.com/sveltejs/kit/issues/6608 (see hooks.server.js)
