@@ -4,8 +4,17 @@ pre_install_actions:
 # This item shows complex go templating possibilities based on yaml_read_files
 - |
 - #ddev-description:Create a hooks.server.js
-  echo '/** @type {import(\\\'@sveltejs/kit\\\').Handle} */\\nexport async function handle({ event, resolve }) {\\n    console.log(\\\'src/hooks.server.js: handle()\\\')\\n    if (process.env.IS_DDEV_PROJECT === \\\'true\\\' && event.url.host === \\\'node-srv\\\') {\\n        event.url = new URL(event.url.href.replace(\\\'http://node-srv\\\', process.env.DDEV_PRIMARY_URL))\\n    }\\n    const response = await resolve(event);\\n    return response;\\n}' >hooks.server.js
-  
+  cat <<'EOF' > hooks.server.js
+  /** @type {import(\'@sveltejs/kit\').Handle} */
+  export async function handle({ event, resolve }) {
+      console.log(\'src/hooks.server.js: handle()\')
+      if (process.env.IS_DDEV_PROJECT === \'true\' && event.url.host === \'node-srv\') {
+          event.url = new URL(event.url.href.replace(\'http://node-srv\', process.env.DDEV_PRIMARY_URL))
+      }
+      const response = await resolve(event);
+      return response;
+  }
+  EOF  
 project_files:
   - nginx_full/nginx-site.conf
 
