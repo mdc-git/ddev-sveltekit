@@ -32,7 +32,7 @@ ddev yarn dev
 
   this essentially handles outgoing cors fetch requests in endpoints.
   
-  it should set the outgoing Origin to DDEV_PRIMARY_URL
+  it should override the outgoing Origin to DDEV_PRIMARY_URL
   
   so that it is consistent with the servers Access-Control-Allow-Origin
 
