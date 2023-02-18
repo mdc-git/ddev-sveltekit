@@ -9,3 +9,6 @@ project_files:
 
 post_install_actions:
   - cp sveltekit/hooks.server.js ../src/hooks.server.js
+  - echo '##############################################################'
+  - echo 'Please do not forget to edit .ddev/docker-compose.network.yaml'
+  - echo '##############################################################'
