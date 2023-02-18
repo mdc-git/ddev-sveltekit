@@ -7,7 +7,7 @@ project_files:
   - sveltekit/hooks.server.js
 
 post_install_actions:
-  - cp .ddev/sveltekit/hooks.server.js src/hooks.server.js
+  - cp sveltekit/hooks.server.js src/hooks.server.js
 
 # post_install_actions:
 #   - ddev exec .ddev/viteserve/build-dotenv.sh
