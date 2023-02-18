@@ -7,7 +7,17 @@ pre_install_actions:
   if [ -f src/hooks.server.js ]; then
     echo "src/hooks.server.js exists. Cannot continue." && exit 2
   fi
-  echo $PWD
+  for file in \
+    .ddev/nginx_full/nginx-site.conf \
+    .ddev/sveltekit/hooks.server.js \
+    .ddev/docker-compose.network.yaml; do
+      if [ -f $file ]; then
+        if ! grep "#ddev-generated" $file; then
+          echo "remove old style file $file"
+          rm $file
+        fi
+      fi
+    done
 
 project_files:
   - nginx_full/nginx-site.conf
