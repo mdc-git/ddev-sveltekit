@@ -50,6 +50,7 @@ ddev yarn dev
 - https://github.com/sveltejs/kit/pull/6550
 - https://github.com/sveltejs/kit/pull/6901
 
-## Related stackoverflow:
+## Other resources:
 
+- https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin#description
 - https://stackoverflow.com/questions/42239643/when-do-browsers-send-the-origin-header-when-do-browsers-set-the-origin-to-null/42242802
