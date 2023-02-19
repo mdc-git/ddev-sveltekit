@@ -13,8 +13,8 @@ You should review your `src/hooks.server.js` file and either remove it or you'd 
 ## What does it do?
 
 1. Overwrite `.ddev/nginx_full/nginx-site.conf` to proxy requests to `http://localhost:5173` and pass the adjusted origin.
-2. Install a `src/hooks.server.js` to adjust the origin on outgoing cors requests
-3. Install a `.ddev/docker-compose.network.yaml` to add additional known hosts in the network
+2. Install a `src/hooks.server.js` to adjust the origin to `DDEV_PRIMARY_URL` on outgoing cors requests.
+3. Install a `.ddev/docker-compose.network.yaml` to add additional known hosts in the network.
 
 ## Sample Usage:
 
