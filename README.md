@@ -30,7 +30,7 @@ ddev yarn dev
 
 - https://github.com/sveltejs/kit/issues/8026
   
-  see [nginx-site.conf](https://github.com/mdc-git/ddev-sveltekit/blob/master/nginx_full/nginx-site.conf): `proxy_set_header Origin http://node-srv;`
+  see [nginx-site.conf](https://github.com/mdc-git/ddev-sveltekit/blob/master/nginx_full/nginx-site.conf#L35-L36): `proxy_set_header Origin http://node-srv;`
   
   this fixes `Cross-site POST form submissions are forbidden` on internal `/api` requests.
   
