@@ -40,3 +40,4 @@ ddev yarn dev
 - https://github.com/sveltejs/kit/issues/6795
 - https://github.com/sveltejs/kit/issues/7441
 - https://github.com/sveltejs/kit/issues/6943
+- https://github.com/sveltejs/kit/pull/6901
