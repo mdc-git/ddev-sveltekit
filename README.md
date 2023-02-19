@@ -23,12 +23,12 @@ ddev yarn dev
 
 - https://github.com/sveltejs/kit/issues/8026
   
-  see [nginx-site.conf](https://github.com/mdc-git/ddev-sveltekit/blob/12b858f12b84fd43bce97cd7a983f88df1d9bcf6/nginx_full/nginx-site.conf): `proxy_set_header Origin http://node-srv;`
+  see [nginx-site.conf](https://github.com/mdc-git/ddev-sveltekit/blob/master/nginx_full/nginx-site.conf): `proxy_set_header Origin http://node-srv;`
   
   this fixes `Cross-site POST form submissions are forbidden` on internal `/api` requests.
   
   
-- https://github.com/sveltejs/kit/issues/6608 (see [hooks.server.js](https://github.com/mdc-git/ddev-sveltekit/blob/12b858f12b84fd43bce97cd7a983f88df1d9bcf6/sveltekit/hooks.server.js))
+- https://github.com/sveltejs/kit/issues/6608 (see [hooks.server.js](https://github.com/mdc-git/ddev-sveltekit/blob/master/sveltekit/hooks.server.js))
 
   this essentially handles outgoing cors fetch requests in endpoints.
   
