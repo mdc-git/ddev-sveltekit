@@ -37,3 +37,4 @@ ddev yarn dev
   this makes it consistent with the external servers `Access-Control-Allow-Origin`
 
 - https://github.com/sveltejs/kit/issues/6589 
+- https://github.com/sveltejs/kit/issues/6795
