@@ -26,6 +26,12 @@ project_files:
 
 post_install_actions:
   - cp sveltekit/hooks.server.js ../src/hooks.server.js
+  - |
+    #ddev-nodisplay
+    echo "Add src/hooks.server.js to .git/info/exclude:"
+    if [ -f .git/info/exclude ]; then
+      grep "src/hooks.server.js" .git/info/exclude || echo "src/hooks.server.js" >> .git/info/exclude
+    fi
   - echo '##############################################################'
   - echo 'Please do not forget to edit .ddev/docker-compose.network.yaml'
   - echo '##############################################################'
