@@ -23,7 +23,7 @@ You should review your `src/hooks.server.[jt]s` file and either remove it or you
 ddev config --auto --omit-containers=db,dba --nodejs-version=16 
 mkcert -install
 ddev get mdc-git/ddev-sveltekit
-ddev yarn dev
+ddev exec NODE_OPTIONS=--inspect=0.0.0.0:9229 ./node_modules/.bin/vite dev
 ```
 
 ## Related bugs:
