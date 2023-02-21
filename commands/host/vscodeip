@@ -8,8 +8,15 @@ set -o pipefail
 set -o errexit 
 set -o nounset
 
-cp ~/.config/Code/User/settings.json ~/.config/Code/User/settings.json.bak
+HJSON="hjson-linux64"
+JQ="jq-linux64"
+CONFIG="${HOME}/.config/Code/User/settings.json"
+PROFILE="Attach to remote node - Server Side Debugging"
+BACKUPFILE=$(mktemp)
+TMPFILE=$(mktemp)
+
+cp ${CONFIG} ${BACKUPFILE}
 ADDRESS=$(docker network inspect ddev-${DDEV_PROJECT}_default | jq .[].Containers[].IPv4Address | xargs echo | awk -F/ '{print $1}')
-echo $ADDRESS
-hjson -j ~/.config/Code/User/settings.json | jq --arg name "Attach to remote node - Server Side Debugging" --arg new_address "${ADDRESS}" '(.launch.configurations[] | select(.name == $name)).address = $new_address' > /tmp/codesettings
-mv /tmp/codesettings ~/.config/Code/User/settings.json
+echo ${ADDRESS}
+hjson -j ${CONFIG} | jq --arg name "${PROFILE}" --arg new_address "${ADDRESS}" '(.launch.configurations[] | select(.name == $name)).address = $new_address' > ${TMPFILE}
+mv ${TMPFILE} ${CONFIG}
