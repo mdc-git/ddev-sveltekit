@@ -22,6 +22,9 @@ pre_install_actions:
 project_files:
   - nginx_full/nginx-site.conf
   - sveltekit/hooks.server.js
+  - sveltekit/hjson-linux64
+  - sveltekit/jq-linux64
+  - commands/host/vscodeip
   - docker-compose.network.yaml
 
 post_install_actions:
