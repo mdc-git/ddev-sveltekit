@@ -44,7 +44,7 @@ ddev exec NODE_OPTIONS=--inspect=0.0.0.0:9229 ./node_modules/.bin/vite dev
 
   this essentially handles outgoing cors fetch requests in endpoints.
   
-  it should override the outgoing requests origin (`event.url`) to `DDEV_PRIMARY_URL`
+  it should override the outgoing requests origin `event.url` to `DDEV_PRIMARY_URL`
   
   this makes it _semantically consistent_ with the external servers `Access-Control-Allow-Origin`
 
