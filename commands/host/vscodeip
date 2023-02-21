@@ -11,13 +11,20 @@ set -o nounset
 
 CONFIG="${HOME}/.config/Code/User/settings.json"
 PROFILE="Attach to remote node - Server Side Debugging"
-BACKUPFILE=$(mktemp)
-TMPFILE=$(mktemp)
 HJSON=".ddev/sveltekit/hjson-linux64"
 JQ=".ddev/sveltekit/jq-linux64"
 
-cp ${CONFIG} ${BACKUPFILE}
+
 ADDRESS=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}} {{end}}' ddev-${DDEV_PROJECT}-web | cut -d' ' -f1)
 echo ${ADDRESS}
+
+if [ ! -e "${CONFIG}" || -z $( grep "${PROFILE}" "${CONFIG}" ) ]; then
+  exit 0
+fi
+
+BACKUPFILE=$(mktemp)
+TMPFILE=$(mktemp)
+
+cp ${CONFIG} ${BACKUPFILE}
 $HJSON -j ${CONFIG} | $JQ --arg name "${PROFILE}" --arg new_address "${ADDRESS}" '(.launch.configurations[] | select(.name == $name)).address = $new_address' > ${TMPFILE}
 mv ${TMPFILE} ${CONFIG}
