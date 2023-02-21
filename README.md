@@ -46,7 +46,7 @@ ddev exec NODE_OPTIONS=--inspect=0.0.0.0:9229 ./node_modules/.bin/vite dev
   
   it should override the outgoing requests origin (`event.url`) to `DDEV_PRIMARY_URL`
   
-  this makes it consistent with the external servers `Access-Control-Allow-Origin`
+  this makes it _semantically consistent_ with the external servers `Access-Control-Allow-Origin`
 
 - https://github.com/sveltejs/kit/issues/6589 
 - https://github.com/sveltejs/kit/issues/6795
