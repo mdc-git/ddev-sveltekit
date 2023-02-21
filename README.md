@@ -64,3 +64,4 @@ ddev exec NODE_OPTIONS=--inspect=0.0.0.0:9229 ./node_modules/.bin/vite dev
 
 - https://github.com/sveltejs/kit/issues/1144
 - https://github.com/sveltejs/kit/issues/7781
+- A linux binary version of jq and hjson will be installed under .ddev/sveltekit which blows the repository size to ~ 5MB. I need them to adjust my vscode config. _Sorry if that bugs you_.
