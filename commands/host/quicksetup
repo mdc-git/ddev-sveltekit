@@ -1,0 +1,118 @@
+#!/usr/bin/env bash
+
+#################################################################################
+# Start Configuration
+# https://ddev.readthedocs.io/en/latest/users/configuration/config/
+# https://ddev.readthedocs.io/en/latest/users/extend/customization-extendibility/
+#################################################################################
+
+FQDN=''
+BROWSERSYNC=false
+WEBIMAGE_EXTRA_PACKAGES=''
+DBIMAGE_EXTRA_PACKAGES=''
+NODE_VERSION=16
+EXTRA_ARGS='--omit-containers=db,dba'
+#################################################################################
+# End Configuration
+#################################################################################
+PROJECT=$(cd $PWD; basename $PWD)
+
+case "$1" in
+  reconfigure)
+    # Perform reconfiguration actions here
+    echo "Reconfiguring..."
+
+    # Append additional FQDNs to the extra arguments
+    EXTRA_ARGS+=${FQDN:+" --additional-fqdns $FQDN"}
+
+    # Append additional webimage packages to the extra arguments
+    EXTRA_ARGS+=${WEBIMAGE_EXTRA_PACKAGES:+" --webimage-extra-packages $WEBIMAGE_EXTRA_PACKAGES"}
+
+    # Append additional dbimage packages to the extra arguments
+    EXTRA_ARGS+=${DBIMAGE_EXTRA_PACKAGES:+" --dbimage-extra-packages $DBIMAGE_EXTRA_PACKAGES"}
+
+    # Append additional dbimage packages to the extra arguments
+    EXTRA_ARGS+=${NODE_VERSION:+" --nodejs-version=$NODE_VERSION"}
+
+    # Get the project name from the current project directory
+    PROJECT=$(cd $PWD; basename $PWD)
+
+    # Stop the current project
+    # ddev stop --unlist $PROJECT
+
+    # Delete the current project
+    ddev delete -O -y $PROJECT
+
+    # Remove the config file
+    rm -f .ddev/config.yaml
+
+    # Install mkcert
+    mkcert -install
+
+    # Configure the project
+    ddev config --auto $EXTRA_ARGS --xdebug-enabled
+
+    # Get the ddev-browsersync package
+    if [ ! -e "package.json" ]; then
+        ddev get drud/ddev-browsersync
+    elif [ -e "vite.config.ts" ]; then
+        ddev get mdc-git/ddev-sveltekit
+    elif [ -e "package.json" ]; then
+        ddev get mdc-git/ddev-nextjs
+    fi
+    ;;
+  *)
+    if [ ! -z "$1" ]; then
+      echo "Invalid option. Usage: $0 reconfigure"
+      exit 0
+    fi
+    ;;
+esac
+
+# Make sure the ddev directory exists
+if [ ! -d ".ddev" ]; then
+    echo "Please edit the configuration .ddev/commands/host/quicksetup and run ddev quicksetup reconfigure"
+    exit 0
+fi
+
+ddev get mdc-git/ddev-network
+mkdir -p .ddev/php
+echo "xdebug.log=/dev/null" > .ddev/php/99-custom.ini
+
+# Restart the project
+ddev restart
+MYNAME="${PROJECT}.ddev.site"
+if [[ ! -z "$FQDN" ]]; then
+    MYNAME=${FQDN}
+fi
+if [ -e "vite.config.ts" ]; then
+    ddev exec NODE_OPTIONS=--inspect=0.0.0.0:9229 ./node_modules/.bin/vite dev &
+    #ddev yarn dev &
+elif [ -e "package.json" ]; then
+    ddev yarn dev &
+else
+    # Enable xdebug
+    ddev xdebug on
+    # Check if BROWSERSYNC is set to true
+    if [[ "$BROWSERSYNC" =~ [Tt][Rr][Uu][Ee] ]]; then
+        # Run browsersync
+        MYPORT=3000
+        MYNAME+=${MYPORT:+": $MYPORT"}
+        ddev browsersync &
+        sleep 1
+    fi
+fi
+
+
+sleep 5
+echo
+echo "      https://${MYNAME}      "
+echo
+
+echo "Press Control + C to exit"
+trap 'echo "Control C was pressed, exiting..."; ddev stop; exit' INT EXIT
+while :
+do
+    sleep 1
+done
+
