@@ -9,23 +9,28 @@ set -o pipefail
 set -o errexit 
 set -o nounset
 
+# vscode config
 CONFIG="${HOME}/.config/Code/User/settings.json"
+# node debug profile name
 PROFILE="Attach to remote node - Server Side Debugging"
+# hjson and jq binaries
 HJSON=".ddev/sveltekit/hjson-linux64"
 JQ=".ddev/sveltekit/jq-linux64"
 
-
+# get container ip of web container
 ADDRESS=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}} {{end}}' ddev-${DDEV_PROJECT}-web | cut -d' ' -f1)
 echo ${ADDRESS}
 
+# check if vscode config exists and if the profile is configured
 if [ ! -e "${CONFIG}" ] || [ -z "$( grep "${PROFILE}" "${CONFIG}" )" ]; then 
   exit 0
 fi
 
-
+# backup the vscode config file to a temp file
 BACKUPFILE=$(mktemp)
-TMPFILE=$(mktemp)
 
+# update vscode config file
+TMPFILE=$(mktemp)
 cp ${CONFIG} ${BACKUPFILE}
 $HJSON -j ${CONFIG} | $JQ --arg name "${PROFILE}" --arg new_address "${ADDRESS}" '(.launch.configurations[] | select(.name == $name)).address = $new_address' > ${TMPFILE}
 mv ${TMPFILE} ${CONFIG}
