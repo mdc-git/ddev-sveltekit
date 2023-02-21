@@ -10,6 +10,7 @@ pre_install_actions:
   for file in \
     .ddev/nginx_full/nginx-site.conf \
     .ddev/sveltekit/hooks.server.js \
+    .ddev/commands/host/vscodeip \
     .ddev/docker-compose.network.yaml; do
       if [ -f $file ]; then
         if ! grep "#ddev-generated" $file; then
