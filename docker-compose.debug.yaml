@@ -2,6 +2,7 @@
 services:
   web:
     environment:
+      # not sure if this is needed. looks like it is consumed by the parent yarn process.
       - NODE_OPTIONS=--inspect=0.0.0.0:9229
       - HTTP_EXPOSE=${DDEV_ROUTER_HTTP_PORT}:80,${DDEV_MAILHOG_PORT}:8025,9229:9229
       - HTTPS_EXPOSE=${DDEV_ROUTER_HTTPS_PORT}:80,${DDEV_MAILHOG_HTTPS_PORT}:8025,9230:9229
