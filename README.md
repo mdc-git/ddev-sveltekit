@@ -54,3 +54,8 @@ ddev exec NODE_OPTIONS=--inspect=0.0.0.0:9229 ./node_modules/.bin/vite dev
 
 - https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Origin#description
 - https://stackoverflow.com/questions/42239643/when-do-browsers-send-the-origin-header-when-do-browsers-set-the-origin-to-null/42242802
+
+## Debugging Notes:
+
+- https://github.com/sveltejs/kit/issues/1144
+- https://github.com/sveltejs/kit/issues/7781
