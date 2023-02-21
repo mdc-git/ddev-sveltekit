@@ -10,12 +10,17 @@ https://github.com/torenware/ddev-viteserve might fit your needs better if you a
 
 You should review your `src/hooks.server.[jt]s` file and either remove it or you'd have to adjust all your files manually.
 
+This exposes the debug port of vite on the container port 9229 aswell. To use it, run
+
+`ddev exec NODE_OPTIONS=--inspect=0.0.0.0:9229 ./node_modules/.bin/vite dev` instead of `ddev yarn dev`.
+
 ## What does it do?
 
 1. Overwrite `.ddev/nginx_full/nginx-site.conf` to proxy requests to `http://localhost:5173` and pass the adjusted origin.
 2. Install a `src/hooks.server.js` to adjust the origin to `DDEV_PRIMARY_URL` on outgoing cors requests when using svelte's provided `fetch`.
 3. Add this `src/hooks.server.js` to `.git/info/exclude`.
 4. Install a `.ddev/docker-compose.network.yaml` to add additional known hosts in the network.
+5. Install a `.ddev/docker-compose.debug.yaml` to expose the vite debugging port
 
 ## Sample Usage:
 
