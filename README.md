@@ -35,18 +35,18 @@ ddev exec NODE_OPTIONS=--inspect=0.0.0.0:9229 ./node_modules/.bin/vite dev
 
 - https://github.com/sveltejs/kit/issues/8026
   
-  see [nginx-site.conf](https://github.com/mdc-git/ddev-sveltekit/blob/master/nginx_full/nginx-site.conf#L35-L36): `proxy_set_header Origin http://node-srv;`
+    - see [nginx-site.conf](https://github.com/mdc-git/ddev-sveltekit/blob/master/nginx_full/nginx-site.conf#L35-L36): `proxy_set_header Origin http://node-srv;`
   
-  this fixes `Cross-site POST form submissions are forbidden` on internal `/api` requests.
+    - this fixes `Cross-site POST form submissions are forbidden` on internal `/api` requests.
   
   
 - https://github.com/sveltejs/kit/issues/6608 (see [hooks.server.js](https://github.com/mdc-git/ddev-sveltekit/blob/master/sveltekit/hooks.server.js))
 
-  this essentially handles outgoing cors fetch requests in endpoints.
+    - this essentially handles outgoing cors fetch requests in endpoints.
   
-  it should override the outgoing requests origin `event.url` to `DDEV_PRIMARY_URL`
+    - it should override the outgoing requests origin `event.url` to `DDEV_PRIMARY_URL`
   
-  this makes it _semantically consistent_ with the external servers `Access-Control-Allow-Origin`
+    - this makes it _semantically consistent_ with the external servers `Access-Control-Allow-Origin`
 
 - https://github.com/sveltejs/kit/issues/6589 
 - https://github.com/sveltejs/kit/issues/6795
