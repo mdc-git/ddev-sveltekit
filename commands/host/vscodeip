@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+## Description: Get container ip
+## Usage: getip
+## Example: "ddev getip"
+
+set -o pipefail 
+set -o errexit 
+set -o nounset
+
+cp ~/.config/Code/User/settings.json ~/.config/Code/User/settings.json.bak
+ADDRESS=$(docker network inspect ddev-${DDEV_PROJECT}_default | jq .[].Containers[].IPv4Address | xargs echo | awk -F/ '{print $1}')
+echo $ADDRESS
+hjson -j ~/.config/Code/User/settings.json | jq --arg name "Attach to remote node - Server Side Debugging" --arg new_address "${ADDRESS}" '(.launch.configurations[] | select(.name == $name)).address = $new_address' > /tmp/codesettings
+mv /tmp/codesettings ~/.config/Code/User/settings.json
