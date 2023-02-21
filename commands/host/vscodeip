@@ -18,9 +18,10 @@ JQ=".ddev/sveltekit/jq-linux64"
 ADDRESS=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}} {{end}}' ddev-${DDEV_PROJECT}-web | cut -d' ' -f1)
 echo ${ADDRESS}
 
-if [ ! -e "${CONFIG}" || -z $( grep "${PROFILE}" "${CONFIG}" ) ]; then
+if [ ! -e "${CONFIG}" ] || [ -z "$( grep "${PROFILE}" "${CONFIG}" )" ]; then 
   exit 0
 fi
+
 
 BACKUPFILE=$(mktemp)
 TMPFILE=$(mktemp)
