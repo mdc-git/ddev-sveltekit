@@ -5,9 +5,10 @@
 ## Example: "ddev vscodeip"
 ## OSTypes: linux
 
-set -o pipefail 
+#set -o pipefail 
 set -o errexit 
-set -o nounset
+#set -o nounset
+#set -x 
 
 # vscode config
 CONFIG="${HOME}/.config/Code/User/settings.json"
@@ -22,6 +23,29 @@ ADDRESS=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}} {{
 echo "ADDRESS: ${ADDRESS}:9229"
 DEVTOOLS_URL=$(curl -s http://${ADDRESS}:9229/json | $JQ .[].devtoolsFrontendUrlCompat | xargs echo)
 echo "DEVTOOLS_URL: ${DEVTOOLS_URL}"
+
+trap 'setxkbmap de,us ,' 0 1; setxkbmap us
+chrome_window="$(xdotool search --onlyvisible --name "Google Chrome" | head -1)"
+echo "chrome_window: ${chrome_window}"
+if [[ -z "${chrome_window}" ]]; then
+  xdotool exec google-chrome 2&>1 >/dev/null
+fi
+while [[ -z "$chrome_window" ]]; do
+  chrome_window=$(xdotool search --onlyvisible --name "Google Chrome" | head -1)
+  sleep 0.1
+done
+
+xdotool windowactivate $chrome_window
+sleep 0.5
+xdotool key ctrl+shift+i
+sleep 0.5
+xdotool key ctrl+shift+i
+sleep 0.5
+xdotool key ctrl+l
+xdotool type "${DEVTOOLS_URL}"
+xdotool key Return
+
+
 # check if vscode config exists and if the profile is configured
 if [ ! -e "${CONFIG}" ] || [ -z "$( grep "${PROFILE}" "${CONFIG}" )" ]; then 
   exit 0
