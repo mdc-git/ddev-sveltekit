@@ -28,7 +28,7 @@ echo -e "PROJECT_URL: ${DDEV_PRIMARY_URL}\n"
 chrome_window="$(xdotool search --onlyvisible --name "Google Chrome" || true | head -1)"
 echo "chrome_window: ${chrome_window}"
 if [[ -z "${chrome_window}" ]]; then
-  xdotool exec google-chrome 2&>1 >/dev/null
+  xdotool exec google-chrome 2>&1 >/dev/null
 fi
 while [[ -z "$chrome_window" ]]; do
   chrome_window=$(xdotool search --onlyvisible --name "Google Chrome" || true | head -1)
