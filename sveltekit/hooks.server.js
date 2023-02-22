@@ -1,10 +1,19 @@
 /** @type {import('@sveltejs/kit').Handle} */
 export async function handle({ event, resolve }) {
+
     if (process.env.IS_DDEV_PROJECT === 'true' && event.url.host === 'node-srv') {
         event.url = new URL(event.url.href.replace('http://node-srv', process.env.DDEV_PRIMARY_URL))
     }
+    let body = null;
+    if (event.request.headers.get('Content-Type')?.includes('multipart/form-data')) {
+        body = await event.request.clone().formData()
+    } else if (event.request.headers.get('Content-Type')?.includes('application/json')) {
+        body = await event.request.clone().json()
+    } else {
+        body = await event.request.clone().text()
+    }
     const response = await resolve(event);
-    console.log('src/hooks.server.js: ' + event.url.pathname + ' ' + response.status);
+    console.debug('src/hooks.server.js: %o %o %o %o\n', event.request.method, event.url.pathname, response.status, Object.fromEntries(body));
+
     return response;
 }
-
