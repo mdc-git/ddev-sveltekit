@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
 ## Description: Get container ip
-## Usage: vscodeip
-## Example: "ddev vscodeip"
+## Usage: nodedebug
+## Example: "ddev nodedebug"
 ## OSTypes: linux
 
 set -o pipefail 
