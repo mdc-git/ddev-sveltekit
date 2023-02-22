@@ -25,7 +25,6 @@ DEVTOOLS_URL=$(curl -s http://${ADDRESS}:9229/json | $JQ .[].devtoolsFrontendUrl
 echo -e "DEVTOOLS_URL: ${DEVTOOLS_URL}\n"
 echo -e "PROJECT_URL: ${DDEV_PRIMARY_URL}\n"
 
-trap 'setxkbmap de,us ,' 0 1; setxkbmap us
 chrome_window="$(xdotool search --onlyvisible --name "Google Chrome" || true | head -1)"
 echo "chrome_window: ${chrome_window}"
 if [[ -z "${chrome_window}" ]]; then
@@ -47,7 +46,9 @@ if [[ "$(xdotool search --onlyvisible --class "google-chrome" getwindowname)" !=
 fi
 sleep 0.5
 xdotool key ctrl+l
+setxkbmap us
 xdotool type "${DEVTOOLS_URL}"
+setxkbmap de,us ,
 xdotool key Return
 
 
