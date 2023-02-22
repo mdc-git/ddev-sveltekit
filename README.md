@@ -64,4 +64,6 @@ ddev viteinspect
 
 - https://github.com/sveltejs/kit/issues/1144
 - https://github.com/sveltejs/kit/issues/7781
+- https://github.com/vitejs/vite/pull/11780
+
 - A linux binary of jq and hjson along with a small utility script to attach vscode to `containerip:9229` will be installed under .ddev/sveltekit and .ddev/commands/host which will increase the repository size to ~5MB. I need them to rewrite my vscode config. _Sorry if that annoys you_.
