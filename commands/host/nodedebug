@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-## Description: Get container ip
+## Description: Debug node.js application
 ## Usage: nodedebug
 ## Example: "ddev nodedebug"
 ## OSTypes: linux
