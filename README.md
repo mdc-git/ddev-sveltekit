@@ -12,7 +12,7 @@ You should review your `src/hooks.server.[jt]s` file and either remove it or you
 
 This exposes the debug port of vite on the container port 9229 aswell. To use it, run
 
-`ddev exec NODE_OPTIONS=--inspect=0.0.0.0:9229 ./node_modules/.bin/vite dev` instead of `ddev yarn dev`.
+`ddev viteinspect` instead of `ddev yarn dev`.
 
 ## What does it do?
 
