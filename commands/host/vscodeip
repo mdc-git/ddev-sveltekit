@@ -19,8 +19,9 @@ JQ=".ddev/sveltekit/jq-linux64"
 
 # get container ip of web container
 ADDRESS=$(docker inspect -f '{{range.NetworkSettings.Networks}}{{.IPAddress}} {{end}}' ddev-${DDEV_PROJECT}-web | cut -d' ' -f1)
-echo ${ADDRESS}
-
+echo "ADDRESS: ${ADDRESS}:9229"
+DEVTOOLS_URL=$(curl -s http://${ADDRESS}:9229/json | $JQ .[].devtoolsFrontendUrlCompat | xargs echo)
+echo "DEVTOOLS_URL: ${DEVTOOLS_URL}"
 # check if vscode config exists and if the profile is configured
 if [ ! -e "${CONFIG}" ] || [ -z "$( grep "${PROFILE}" "${CONFIG}" )" ]; then 
   exit 0
