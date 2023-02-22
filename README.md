@@ -28,7 +28,7 @@ This exposes the debug port of vite on the container port 9229 aswell. To use it
 ddev config --auto --omit-containers=db,dba --nodejs-version=16 
 mkcert -install
 ddev get mdc-git/ddev-sveltekit
-ddev exec NODE_OPTIONS=--inspect=0.0.0.0:9229 ./node_modules/.bin/vite dev
+ddev viteinspect
 ```
 
 ## Related bugs:
