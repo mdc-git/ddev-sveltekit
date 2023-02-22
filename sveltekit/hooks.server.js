@@ -13,7 +13,7 @@ export async function handle({ event, resolve }) {
         body = await event.request.clone().text()
     }
     const response = await resolve(event);
-    console.debug('src/hooks.server.js: %o %o %o %o\n', event.request.method, event.url.pathname, response.status, Object.fromEntries(body));
+    console.debug('src/hooks.server.js: %o %o %o \n%o', event.request.method, event.url.pathname, response.status, Object.fromEntries(body));
 
     return response;
 }
